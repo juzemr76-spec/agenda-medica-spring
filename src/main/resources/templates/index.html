@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agenda Médica</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="phone">
+
+    <header class="topo">
+        <div>
+            <h1>Agenda Médica</h1>
+            <p>Gestão de consultas</p>
+        </div>
+
+        <div class="icone-topo">🏥</div>
+    </header>
+
+    <main class="conteudo">
+
+        <section class="boas-vindas">
+            <span class="saudacao">Bem-vindo!</span>
+            <h2>O que você deseja fazer?</h2>
+            <p>Gerencie pacientes e consultas de forma simples.</p>
+        </section>
+
+        <section class="cards-menu">
+
+            <a th:href="@{/pacientes}" class="card-menu">
+                <div class="card-icone paciente-icone">👤</div>
+
+                <div>
+                    <h3>Pacientes</h3>
+                    <p>Cadastrar e consultar pacientes</p>
+                </div>
+
+                <span class="seta">›</span>
+            </a>
+
+            <a th:href="@{/consultas}" class="card-menu">
+                <div class="card-icone consulta-icone">📅</div>
+
+                <div>
+                    <h3>Consultas</h3>
+                    <p>Agendar e acompanhar consultas</p>
+                </div>
+
+                <span class="seta">›</span>
+            </a>
+
+            <a th:href="@{/pacientes/novo}" class="card-menu">
+                <div class="card-icone adicionar-icone">➕</div>
+
+                <div>
+                    <h3>Novo paciente</h3>
+                    <p>Cadastrar um novo paciente</p>
+                </div>
+
+                <span class="seta">›</span>
+            </a>
+
+            <a th:href="@{/consultas/novo}" class="card-menu">
+                <div class="card-icone agendar-icone">🩺</div>
+
+                <div>
+                    <h3>Nova consulta</h3>
+                    <p>Realizar novo agendamento</p>
+                </div>
+
+                <span class="seta">›</span>
+            </a>
+
+        </section>
+
+    </main>
+
+    <nav class="menu-inferior">
+
+        <a th:href="@{/}" class="ativo">
+            <span>⌂</span>
+            <small>Início</small>
+        </a>
+
+        <a th:href="@{/pacientes}">
+            <span>👤</span>
+            <small>Pacientes</small>
+        </a>
+
+        <a th:href="@{/consultas}">
+            <span>📅</span>
+            <small>Consultas</small>
+        </a>
+
+    </nav>
+
+</div>
+
+</body>
+</html>

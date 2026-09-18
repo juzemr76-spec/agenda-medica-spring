@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pacientes - Agenda Médica</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="phone">
+
+    <header class="topo">
+        <h1>Pacientes</h1>
+
+        <a th:href="@{/}" class="btn-voltar">
+            Início
+        </a>
+    </header>
+
+    <main class="conteudo">
+
+        <div class="cabecalho-pagina">
+
+            <h2>Lista de pacientes</h2>
+
+            <a th:href="@{/pacientes/novo}" class="btn-principal">
+                + Novo paciente
+            </a>
+
+        </div>
+
+        <div th:if="${#lists.isEmpty(pacientes)}"
+             class="mensagem-vazia">
+
+            <p>Nenhum paciente cadastrado.</p>
+
+        </div>
+
+        <div th:unless="${#lists.isEmpty(pacientes)}"
+             class="lista-pacientes">
+
+            <div class="card-paciente"
+                 th:each="paciente : ${pacientes}">
+
+                <div class="dados-paciente">
+
+                    <!-- NOME DO PACIENTE CLICÁVEL -->
+                    <h3>
+                        <a th:href="@{/pacientes/{id}(id=${paciente.id})}"
+                           th:text="${paciente.nome}">
+                            Nome do paciente
+                        </a>
+                    </h3>
+
+                    <p>
+                        <strong>CPF:</strong>
+                        <span th:text="${paciente.cpf}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Telefone:</strong>
+                        <span th:text="${paciente.telefone}"></span>
+                    </p>
+
+                </div>
+
+                <div class="acoes-paciente">
+
+                    <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}"
+                       class="btn-editar">
+                        Editar
+                    </a>
+
+                    <a th:href="@{/pacientes/excluir/{id}(id=${paciente.id})}"
+                       class="btn-excluir"
+                       onclick="return confirm('Deseja realmente excluir este paciente?');">
+                        Excluir
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+

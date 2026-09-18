@@ -1,0 +1,741 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --principal: #1769aa;
+    --principal-escuro: #0d4f82;
+    --fundo: #f4f7fb;
+    --branco: #ffffff;
+    --texto: #1f2937;
+    --texto-secundario: #6b7280;
+    --borda: #dfe5ec;
+    --perigo: #dc3545;
+    --sucesso: #198754;
+    --amarelo: #f59e0b;
+}
+
+body {
+    min-height: 100vh;
+    background: #e9eef5;
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ESTRUTURA PRINCIPAL */
+
+.phone {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: var(--fundo);
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* TOPO */
+
+.topo {
+    min-height: 92px;
+    padding: 20px;
+    background: var(--principal);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topo h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.topo p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.icone-topo {
+    font-size: 34px;
+}
+
+/* BOTÃO VOLTAR */
+
+.btn-voltar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    text-decoration: none;
+
+    font-size: 25px;
+}
+
+/* CONTEÚDO */
+
+.conteudo {
+    padding: 20px;
+}
+
+/* PÁGINA INICIAL */
+
+.boas-vindas {
+    margin-bottom: 22px;
+}
+
+.saudacao {
+    color: var(--principal);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.boas-vindas h2 {
+    font-size: 23px;
+    margin: 5px 0;
+}
+
+.boas-vindas p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+/* CARDS MENU */
+
+.cards-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-menu {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 17px;
+
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 15px;
+
+    text-decoration: none;
+    color: var(--texto);
+
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-menu:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-menu h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.card-menu p {
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.card-icone {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+.paciente-icone {
+    background: #e8f1ff;
+}
+
+.consulta-icone {
+    background: #e9f8ef;
+}
+
+.adicionar-icone {
+    background: #fff4df;
+}
+
+.agendar-icone {
+    background: #f0e9ff;
+}
+
+.seta {
+    margin-left: auto;
+    font-size: 27px;
+    color: #9ca3af;
+}
+
+/* CABEÇALHO DAS PÁGINAS */
+
+.cabecalho-pagina {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+.cabecalho-pagina h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.cabecalho-pagina p {
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+/* BOTÕES */
+
+.btn-principal {
+    background: var(--principal);
+    color: white;
+
+    padding: 11px 14px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+.btn-principal:hover {
+    background: var(--principal-escuro);
+}
+
+.btn-salvar {
+    border: none;
+    background: var(--principal);
+    color: white;
+
+    padding: 13px 18px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.btn-salvar:hover {
+    background: var(--principal-escuro);
+}
+
+.btn-salvar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-cancelar {
+    background: #eef1f5;
+    color: #4b5563;
+
+    padding: 13px 18px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-cancelar:hover {
+    background: #e0e5eb;
+}
+
+/* LISTA DE PACIENTES */
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-paciente {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background: white;
+    border: 1px solid var(--borda);
+
+    border-radius: 13px;
+
+    padding: 14px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e8f1ff;
+
+    font-size: 21px;
+
+    flex-shrink: 0;
+}
+
+.dados-item {
+    min-width: 0;
+    flex: 1;
+}
+
+.dados-item h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dados-item p {
+    color: var(--texto-secundario);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.acoes {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-editar,
+.btn-excluir {
+    width: 35px;
+    height: 35px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 15px;
+}
+
+.btn-editar {
+    background: #eaf3ff;
+}
+
+.btn-excluir {
+    background: #fff0f1;
+}
+
+/* FORMULÁRIO */
+
+.formulario {
+    background: white;
+
+    border: 1px solid var(--borda);
+    border-radius: 15px;
+
+    padding: 20px;
+}
+
+.formulario h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.descricao-form {
+    color: var(--texto-secundario);
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.campo {
+    margin-bottom: 17px;
+}
+
+.campo label {
+    display: block;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+.campo label span {
+    color: var(--perigo);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+
+    padding: 12px;
+
+    background: white;
+
+    color: var(--texto);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--principal);
+    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.1);
+}
+
+.campo textarea {
+    resize: vertical;
+}
+
+.ajuda {
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.ajuda a {
+    color: var(--principal);
+    font-weight: bold;
+}
+
+.botoes-formulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+/* CONSULTAS */
+
+.lista-consultas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-consulta {
+    background: white;
+
+    border: 1px solid var(--borda);
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+.consulta-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+.data-consulta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.icone-calendario {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #e8f1ff;
+}
+
+.data-consulta div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.data-consulta strong {
+    font-size: 14px;
+}
+
+.data-consulta span {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+/* STATUS */
+
+.status {
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+.status-agendada {
+    background: #fff4df;
+    color: #9a6700;
+}
+
+.status-confirmada {
+    background: #e8f7ee;
+    color: #14763d;
+}
+
+.status-realizada {
+    background: #e8f1ff;
+    color: #1769aa;
+}
+
+.status-cancelada {
+    background: #ffe9eb;
+    color: #b42333;
+}
+
+.status-faltou {
+    background: #eeeeee;
+    color: #555555;
+}
+
+/* CORPO CONSULTA */
+
+.consulta-corpo {
+    padding: 15px;
+}
+
+.consulta-corpo h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.info-consulta {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.info-consulta p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    font-size: 12px;
+
+    color: var(--texto-secundario);
+}
+
+.info-consulta p strong {
+    color: var(--texto);
+}
+
+/* AÇÕES CONSULTA */
+
+.acoes-consulta {
+    display: flex;
+    gap: 8px;
+
+    padding: 12px 15px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+.btn-editar-consulta,
+.btn-excluir-consulta {
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.btn-editar-consulta {
+    background: #eaf3ff;
+    color: var(--principal);
+}
+
+.btn-excluir-consulta {
+    background: #fff0f1;
+    color: var(--perigo);
+}
+
+/* ESTADO VAZIO */
+
+.vazio {
+    background: white;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 15px;
+
+    text-align: center;
+
+    padding: 35px 20px;
+}
+
+.vazio-icone {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.vazio h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.vazio p {
+    color: var(--texto-secundario);
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+/* MENU INFERIOR */
+
+.menu-inferior {
+    position: fixed;
+
+    bottom: 0;
+
+    width: 100%;
+    max-width: 520px;
+
+    height: 68px;
+
+    background: white;
+
+    border-top: 1px solid var(--borda);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    z-index: 100;
+}
+
+.menu-inferior a {
+    flex: 1;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    text-decoration: none;
+
+    color: #8993a1;
+
+    font-size: 20px;
+}
+
+.menu-inferior small {
+    font-size: 11px;
+}
+
+.menu-inferior a.ativo {
+    color: var(--principal);
+    font-weight: bold;
+}
+
+/* RESPONSIVIDADE */
+
+@media (min-width: 521px) {
+
+    .phone {
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .menu-inferior {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 380px) {
+
+    .conteudo {
+        padding: 15px;
+    }
+
+    .topo {
+        padding: 17px;
+    }
+
+    .formulario {
+        padding: 15px;
+    }
+
+    .cabecalho-pagina h2 {
+        font-size: 17px;
+    }
+
+    .btn-principal {
+        padding: 9px 10px;
+    }
+
+    .botoes-formulario {
+        flex-direction: column-reverse;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+        text-align: center;
+    }
+}

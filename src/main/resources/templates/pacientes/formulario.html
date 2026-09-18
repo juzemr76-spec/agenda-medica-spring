@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${paciente.id == null ? 'Novo Paciente' : 'Editar Paciente'}">
+        Paciente - Agenda Médica
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="phone">
+
+    <header class="topo">
+
+        <div>
+            <h1 th:text="${paciente.id == null ? 'Novo paciente' : 'Editar paciente'}">
+                Novo paciente
+            </h1>
+
+            <p>Dados do paciente</p>
+        </div>
+
+        <a th:href="@{/pacientes}" class="btn-voltar">←</a>
+
+    </header>
+
+    <main class="conteudo">
+
+        <div class="formulario">
+
+            <h2>Informações pessoais</h2>
+
+            <p class="descricao-form">
+                Preencha os dados abaixo para cadastrar o paciente.
+            </p>
+
+            <form th:action="@{/pacientes/salvar}"
+                  th:object="${paciente}"
+                  method="post">
+
+                <input type="hidden" th:field="*{id}">
+
+                <!-- NOME -->
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome completo <span>*</span>
+                    </label>
+
+                    <input type="text"
+                           id="nome"
+                           th:field="*{nome}"
+                           placeholder="Digite o nome completo"
+                           autocomplete="name"
+                           required>
+
+                </div>
+
+                <!-- CPF -->
+                <div class="campo">
+
+                    <label for="cpf">CPF</label>
+
+                    <input type="text"
+                           id="cpf"
+                           th:field="*{cpf}"
+                           placeholder="000.000.000-00"
+                           maxlength="14"
+                           inputmode="numeric">
+
+                </div>
+
+                <!-- DATA NASCIMENTO -->
+                <div class="campo">
+
+                    <label for="dataNascimento">
+                        Data de nascimento
+                    </label>
+
+                    <input type="date"
+                           id="dataNascimento"
+                           th:field="*{dataNascimento}">
+
+                </div>
+
+                <!-- TELEFONE -->
+                <div class="campo">
+
+                    <label for="telefone">Telefone</label>
+
+                    <input type="tel"
+                           id="telefone"
+                           th:field="*{telefone}"
+                           placeholder="(00) 00000-0000"
+                           maxlength="15"
+                           autocomplete="tel">
+
+                </div>
+
+                <!-- ENDEREÇO -->
+                <div class="campo">
+
+                    <label for="endereco">Endereço</label>
+
+                    <textarea id="endereco"
+                              th:field="*{endereco}"
+                              rows="3"
+                              placeholder="Rua, número, bairro..."></textarea>
+
+                </div>
+
+                <!-- BOTÕES -->
+                <div class="botoes-formulario">
+
+                    <a th:href="@{/pacientes}"
+                       class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit"
+                            class="btn-salvar">
+
+                        <span th:text="${paciente.id == null ? 'Cadastrar paciente' : 'Salvar alterações'}">
+                            Salvar
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <nav class="menu-inferior">
+
+        <a th:href="@{/}">
+            <span>⌂</span>
+            <small>Início</small>
+        </a>
+
+        <a th:href="@{/pacientes}" class="ativo">
+            <span>👤</span>
+            <small>Pacientes</small>
+        </a>
+
+        <a th:href="@{/consultas}">
+            <span>📅</span>
+            <small>Consultas</small>
+        </a>
+
+    </nav>
+
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

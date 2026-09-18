@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalhes do Paciente - Agenda Médica</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="phone">
+
+    <header class="topo">
+        <div>
+            <h1>Paciente</h1>
+            <p>Detalhes do cadastro</p>
+        </div>
+
+        <a th:href="@{/pacientes}" class="btn-voltar">
+            Voltar
+        </a>
+    </header>
+
+    <main class="conteudo">
+
+        <div class="card-paciente">
+
+            <h2 th:text="${paciente.nome}">
+                Nome do paciente
+            </h2>
+
+            <div class="detalhes-paciente">
+
+                <p>
+                    <strong>CPF:</strong>
+                    <span th:text="${paciente.cpf}"></span>
+                </p>
+
+                <p>
+                    <strong>Data de nascimento:</strong>
+                    <span th:text="${paciente.dataNascimento}"></span>
+                </p>
+
+                <p>
+                    <strong>Telefone:</strong>
+                    <span th:text="${paciente.telefone}"></span>
+                </p>
+
+                <p>
+                    <strong>Endereço:</strong>
+                    <span th:text="${paciente.endereco}"></span>
+                </p>
+
+            </div>
+
+            <div class="acoes-paciente">
+
+                <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}"
+                   class="btn-editar">
+                    Editar paciente
+                </a>
+
+                <a th:href="@{/pacientes}"
+                   class="btn-voltar">
+                    Voltar para pacientes
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
