@@ -1,181 +1,187 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Consultas - Agenda Médica</title>
 
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+<title>Consultas - Agenda Médica</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+
 </head>
 
 <body>
 
 <div class="phone">
 
-    <header class="topo">
+
+<header class="topo">
+
+    <div>
+        <h1>Consultas</h1>
+        <p>Agenda de consultas</p>
+    </div>
+
+    <a th:href="@{/}" class="btn-voltar">←</a>
+
+</header>
+
+<main class="conteudo">
+
+    <div class="cabecalho-pagina">
 
         <div>
-            <h1>Consultas</h1>
-            <p>Agenda de consultas</p>
+            <h2>Consultas agendadas</h2>
+            <p>Acompanhe os agendamentos</p>
         </div>
 
-        <a th:href="@{/}" class="btn-voltar">←</a>
+        <a th:href="@{/consultas/novo}"
+           class="btn-principal">
+            + Agendar
+        </a>
 
-    </header>
+    </div>
 
-    <main class="conteudo">
+    <!-- SEM CONSULTAS -->
+    <div class="vazio"
+         th:if="${#lists.isEmpty(consultas)}">
 
-        <div class="cabecalho-pagina">
+        <div class="vazio-icone">📅</div>
 
-            <div>
-                <h2>Consultas agendadas</h2>
-                <p>Acompanhe os agendamentos</p>
-            </div>
+        <h3>Nenhuma consulta cadastrada</h3>
 
-            <a th:href="@{/consultas/novo}"
-               class="btn-principal">
-                + Agendar
-            </a>
+        <p>
+            Ainda não existem consultas na agenda.
+        </p>
 
-        </div>
+        <a th:href="@{/consultas/novo}"
+           class="btn-salvar">
+            Agendar consulta
+        </a>
 
-        <!-- SEM CONSULTAS -->
-        <div class="vazio"
-             th:if="${#lists.isEmpty(consultas)}">
+    </div>
 
-            <div class="vazio-icone">📅</div>
+    <!-- CONSULTAS -->
+    <div class="lista-consultas"
+         th:unless="${#lists.isEmpty(consultas)}">
 
-            <h3>Nenhuma consulta cadastrada</h3>
+        <div class="card-consulta"
+             th:each="consulta : ${consultas}">
 
-            <p>
-                Ainda não existem consultas na agenda.
-            </p>
+            <div class="consulta-topo">
 
-            <a th:href="@{/consultas/novo}"
-               class="btn-salvar">
-                Agendar consulta
-            </a>
+                <div class="data-consulta">
 
-        </div>
-
-        <!-- CONSULTAS -->
-        <div class="lista-consultas"
-             th:unless="${#lists.isEmpty(consultas)}">
-
-            <div class="card-consulta"
-                 th:each="consulta : ${consultas}">
-
-                <div class="consulta-topo">
-
-                    <div class="data-consulta">
-
-                        <span class="icone-calendario">
-                            📅
-                        </span>
-
-                        <div>
-
-                            <strong th:text="${consulta.data}">
-                                00/00/0000
-                            </strong>
-
-                            <span th:text="${consulta.horario}">
-                                00:00
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <span class="status"
-                          th:classappend="${consulta.status == 'Confirmada' ? ' status-confirmada' :
-                                           consulta.status == 'Realizada' ? ' status-realizada' :
-                                           consulta.status == 'Cancelada' ? ' status-cancelada' :
-                                           consulta.status == 'Faltou' ? ' status-faltou' :
-                                           ' status-agendada'}"
-                          th:text="${consulta.status}">
-                        Agendada
+                    <span class="icone-calendario">
+                        📅
                     </span>
 
-                </div>
+                    <div>
 
-                <div class="consulta-corpo">
+                        <strong th:text="${consulta.data}">
+                            00/00/0000
+                        </strong>
 
-                    <h3 th:text="${consulta.paciente.nome}">
-                        Nome do paciente
-                    </h3>
-
-                    <div class="info-consulta">
-
-                        <p>
-                            <span>🩺</span>
-                            <strong>Especialidade:</strong>
-                            <span th:text="${consulta.especialidade}">
-                                Clínica Geral
-                            </span>
-                        </p>
-
-                        <p>
-                            <span>👨‍⚕️</span>
-                            <strong>Profissional:</strong>
-                            <span th:text="${consulta.profissional}">
-                                Profissional
-                            </span>
-                        </p>
-
-                        <p th:if="${consulta.observacao != null and !consulta.observacao.isEmpty()}">
-                            <span>📝</span>
-                            <strong>Observação:</strong>
-                            <span th:text="${consulta.observacao}">
-                                Observação
-                            </span>
-                        </p>
+                        <span th:text="${consulta.horario}">
+                            00:00
+                        </span>
 
                     </div>
 
                 </div>
 
-                <div class="acoes-consulta">
+                <span class="status"
+                      th:classappend="${consulta.status == 'Confirmada' ? ' status-confirmada' :
+                                       consulta.status == 'Realizada' ? ' status-realizada' :
+                                       consulta.status == 'Cancelada' ? ' status-cancelada' :
+                                       consulta.status == 'Faltou' ? ' status-faltou' :
+                                       ' status-agendada'}"
+                      th:text="${consulta.status}">
+                    Agendada
+                </span>
 
-                    <a th:href="@{/consultas/editar/{id}(id=${consulta.id})}"
-                       class="btn-editar-consulta">
-                        ✏️ Editar
-                    </a>
+            </div>
 
-                    <a th:href="@{/consultas/excluir/{id}(id=${consulta.id})}"
-                       class="btn-excluir-consulta"
-                       onclick="return confirmarExclusao('consulta');">
-                        🗑️ Excluir
-                    </a>
+            <div class="consulta-corpo">
+
+                <h3 th:text="${consulta.paciente.nome}">
+                    Nome do paciente
+                </h3>
+
+                <div class="info-consulta">
+
+                    <p>
+                        <span>🩺</span>
+                        <strong>Especialidade:</strong>
+                        <span th:text="${consulta.especialidade}">
+                            Clínica Geral
+                        </span>
+                    </p>
+
+                    <p>
+                        <span>👨‍⚕️</span>
+                        <strong>Profissional:</strong>
+                        <span th:text="${consulta.profissional}">
+                            Profissional
+                        </span>
+                    </p>
+
+                    <p th:if="${consulta.observacao != null and !consulta.observacao.isEmpty()}">
+                        <span>📝</span>
+                        <strong>Observação:</strong>
+                        <span th:text="${consulta.observacao}">
+                            Observação
+                        </span>
+                    </p>
 
                 </div>
 
             </div>
 
+            <div class="acoes-consulta">
+
+                <a th:href="@{/consultas/editar/{id}(id=${consulta.id})}"
+                   class="btn-editar-consulta">
+                    ✏️ Editar
+                </a>
+
+                <a th:href="@{/consultas/excluir/{id}(id=${consulta.id})}"
+                   class="btn-excluir-consulta"
+                   onclick="return confirmarExclusao('consulta');">
+                    🗑️ Excluir
+                </a>
+
+            </div>
+
         </div>
 
-    </main>
+    </div>
 
-    <nav class="menu-inferior">
+</main>
 
-        <a th:href="@{/}">
-            <span>⌂</span>
-            <small>Início</small>
-        </a>
+<nav class="menu-inferior">
 
-        <a th:href="@{/pacientes}">
-            <span>👤</span>
-            <small>Pacientes</small>
-        </a>
+    <a th:href="@{/}">
+        <span>⌂</span>
+        <small>Início</small>
+    </a>
 
-        <a th:href="@{/consultas}" class="ativo">
-            <span>📅</span>
-            <small>Consultas</small>
-        </a>
+    <a th:href="@{/pacientes}">
+        <span>👤</span>
+        <small>Pacientes</small>
+    </a>
 
-    </nav>
+    <a th:href="@{/consultas}" class="ativo">
+        <span>📅</span>
+        <small>Consultas</small>
+    </a>
+
+</nav>
+
 
 </div>
 

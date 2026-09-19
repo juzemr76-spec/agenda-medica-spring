@@ -1,185 +1,237 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Consultas - Agenda Médica</title>
 
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+<title th:text="${consulta.id == null ? 'Nova Consulta - Agenda Médica' : 'Editar Consulta - Agenda Médica'}">
+    Nova Consulta - Agenda Médica
+</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+
 </head>
 
 <body>
 
 <div class="phone">
 
-    <header class="topo">
+
+<header class="topo">
+
+    <div>
+        <h1 th:text="${consulta.id == null ? 'Nova Consulta' : 'Editar Consulta'}">
+            Nova Consulta
+        </h1>
+
+        <p>Preencha os dados do agendamento</p>
+    </div>
+
+    <a th:href="@{/consultas}" class="btn-voltar">←</a>
+
+</header>
+
+<main class="conteudo">
+
+    <div class="cabecalho-pagina">
 
         <div>
-            <h1>Consultas</h1>
-            <p>Agenda de consultas</p>
-        </div>
-
-        <a th:href="@{/}" class="btn-voltar">←</a>
-
-    </header>
-
-    <main class="conteudo">
-
-        <div class="cabecalho-pagina">
-
-            <div>
-                <h2>Consultas agendadas</h2>
-                <p>Acompanhe os agendamentos</p>
-            </div>
-
-            <a th:href="@{/consultas/novo}"
-               class="btn-principal">
-                + Agendar
-            </a>
-
-        </div>
-
-        <!-- SEM CONSULTAS -->
-        <div class="vazio"
-             th:if="${#lists.isEmpty(consultas)}">
-
-            <div class="vazio-icone">📅</div>
-
-            <h3>Nenhuma consulta cadastrada</h3>
+            <h2 th:text="${consulta.id == null ? 'Agendar consulta' : 'Editar consulta'}">
+                Agendar consulta
+            </h2>
 
             <p>
-                Ainda não existem consultas na agenda.
+                Informe os dados do atendimento
             </p>
+        </div>
 
-            <a th:href="@{/consultas/novo}"
-               class="btn-salvar">
-                Agendar consulta
+    </div>
+
+    <form th:action="@{/consultas/salvar}"
+          th:object="${consulta}"
+          method="post"
+          class="formulario">
+
+        <!-- ID DA CONSULTA -->
+        <input type="hidden"
+               th:field="*{id}">
+
+        <!-- PACIENTE -->
+        <div class="campo-formulario">
+
+            <label for="paciente">
+                Paciente
+            </label>
+
+            <select id="paciente"
+                    name="paciente.id"
+                    required>
+
+                <option value="">
+                    Selecione o paciente
+                </option>
+
+                <option th:each="paciente : ${pacientes}"
+                        th:value="${paciente.id}"
+                        th:text="${paciente.nome}"
+                        th:selected="${consulta.paciente != null and consulta.paciente.id == paciente.id}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- DATA -->
+        <div class="campo-formulario">
+
+            <label for="data">
+                Data da consulta
+            </label>
+
+            <input type="date"
+                   id="data"
+                   th:field="*{data}"
+                   required>
+
+        </div>
+
+        <!-- HORÁRIO -->
+        <div class="campo-formulario">
+
+            <label for="horario">
+                Horário
+            </label>
+
+            <input type="time"
+                   id="horario"
+                   th:field="*{horario}"
+                   required>
+
+        </div>
+
+        <!-- ESPECIALIDADE -->
+        <div class="campo-formulario">
+
+            <label for="especialidade">
+                Especialidade
+            </label>
+
+            <input type="text"
+                   id="especialidade"
+                   th:field="*{especialidade}"
+                   placeholder="Ex.: Clínica Geral"
+                   required>
+
+        </div>
+
+        <!-- PROFISSIONAL -->
+        <div class="campo-formulario">
+
+            <label for="profissional">
+                Profissional
+            </label>
+
+            <input type="text"
+                   id="profissional"
+                   th:field="*{profissional}"
+                   placeholder="Nome do médico ou profissional"
+                   required>
+
+        </div>
+
+        <!-- STATUS -->
+        <div class="campo-formulario">
+
+            <label for="status">
+                Status
+            </label>
+
+            <select id="status"
+                    th:field="*{status}">
+
+                <option value="Agendada">
+                    Agendada
+                </option>
+
+                <option value="Confirmada">
+                    Confirmada
+                </option>
+
+                <option value="Realizada">
+                    Realizada
+                </option>
+
+                <option value="Cancelada">
+                    Cancelada
+                </option>
+
+                <option value="Faltou">
+                    Faltou
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- OBSERVAÇÃO -->
+        <div class="campo-formulario">
+
+            <label for="observacao">
+                Observação
+            </label>
+
+            <textarea id="observacao"
+                      th:field="*{observacao}"
+                      rows="4"
+                      placeholder="Digite alguma observação sobre a consulta...">
+            </textarea>
+
+        </div>
+
+        <!-- BOTÕES -->
+        <div class="acoes-formulario">
+
+            <a th:href="@{/consultas}"
+               class="btn-cancelar">
+                Cancelar
             </a>
 
-        </div>
-
-        <!-- CONSULTAS -->
-        <div class="lista-consultas"
-             th:unless="${#lists.isEmpty(consultas)}">
-
-            <div class="card-consulta"
-                 th:each="consulta : ${consultas}">
-
-                <div class="consulta-topo">
-
-                    <div class="data-consulta">
-
-                        <span class="icone-calendario">
-                            📅
-                        </span>
-
-                        <div>
-
-                            <strong th:text="${consulta.data}">
-                                00/00/0000
-                            </strong>
-
-                            <span th:text="${consulta.horario}">
-                                00:00
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <span class="status"
-                          th:classappend="${consulta.status == 'Confirmada' ? ' status-confirmada' :
-                                           consulta.status == 'Realizada' ? ' status-realizada' :
-                                           consulta.status == 'Cancelada' ? ' status-cancelada' :
-                                           consulta.status == 'Faltou' ? ' status-faltou' :
-                                           ' status-agendada'}"
-                          th:text="${consulta.status}">
-                        Agendada
-                    </span>
-
-                </div>
-
-                <div class="consulta-corpo">
-
-                    <h3 th:text="${consulta.paciente.nome}">
-                        Nome do paciente
-                    </h3>
-
-                    <div class="info-consulta">
-
-                        <p>
-                            <span>🩺</span>
-                            <strong>Especialidade:</strong>
-                            <span th:text="${consulta.especialidade}">
-                                Clínica Geral
-                            </span>
-                        </p>
-
-                        <p>
-                            <span>👨‍⚕️</span>
-                            <strong>Profissional:</strong>
-                            <span th:text="${consulta.profissional}">
-                                Profissional
-                            </span>
-                        </p>
-
-                        <p th:if="${consulta.observacao != null and !consulta.observacao.isEmpty()}">
-                            <span>📝</span>
-                            <strong>Observação:</strong>
-                            <span th:text="${consulta.observacao}">
-                                Observação
-                            </span>
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="acoes-consulta">
-
-                    <a th:href="@{/consultas/editar/{id}(id=${consulta.id})}"
-                       class="btn-editar-consulta">
-                        ✏️ Editar
-                    </a>
-
-                    <a th:href="@{/consultas/excluir/{id}(id=${consulta.id})}"
-                       class="btn-excluir-consulta"
-                       onclick="return confirmarExclusao('consulta');">
-                        🗑️ Excluir
-                    </a>
-
-                </div>
-
-            </div>
+            <button type="submit"
+                    class="btn-salvar">
+                💾 Salvar consulta
+            </button>
 
         </div>
 
-    </main>
+    </form>
 
-    <nav class="menu-inferior">
+</main>
 
-        <a th:href="@{/}">
-            <span>⌂</span>
-            <small>Início</small>
-        </a>
+<nav class="menu-inferior">
 
-        <a th:href="@{/pacientes}">
-            <span>👤</span>
-            <small>Pacientes</small>
-        </a>
+    <a th:href="@{/}">
+        <span>⌂</span>
+        <small>Início</small>
+    </a>
 
-        <a th:href="@{/consultas}" class="ativo">
-            <span>📅</span>
-            <small>Consultas</small>
-        </a>
+    <a th:href="@{/pacientes}">
+        <span>👤</span>
+        <small>Pacientes</small>
+    </a>
 
-    </nav>
+    <a th:href="@{/consultas}" class="ativo">
+        <span>📅</span>
+        <small>Consultas</small>
+    </a>
+
+</nav>
+
 
 </div>
-
-<script th:src="@{/js/script.js}"></script>
 
 </body>
 </html>
